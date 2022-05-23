@@ -9,7 +9,7 @@ var bodyParser=require('body-parser');
 var app=express();
 
 //Cargar ficheros y rutas
-var restoRoutes=require('../backend/routes/restoRoutes');
+var restoRoutes=require('./routes/restoRoutes');
 
 
 //Cargar middlewares
