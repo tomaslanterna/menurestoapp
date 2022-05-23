@@ -9,7 +9,7 @@ var bodyParser=require('body-parser');
 var app=express();
 
 //Cargar ficheros y rutas
-//var restoRoutes=require('./routes/restoRoutes');
+var restoRoutes=require('./routes/restoRoutes');
 
 
 //Cargar middlewares
@@ -27,10 +27,10 @@ app.use((req,res,next)=>{
 
 
 //Agregar prefijos a ruta
-//app.use('/api',restoRoutes);
-app.get('/',()=>{
+app.use('/',restoRoutes);
+/*app.get('/',()=>{
     console.log('Hola mundo');
-});
+});*/
 
 //Exportar modulo-fichero actual
 module.exports=app;
