@@ -5,7 +5,7 @@ var app=require('./app');
 var port=3800;
 
 mongoose.Promise=global.Promise;
-mongoose.connect('mongodb://localhost:27017/menurestos', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://tomi:Sanantonio20$@restoappcluster.iunel.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
     .then(() => {
         console.log('La conexion a la db se a realizado bien');
         //Crear servidor y me pongo a escuchar peticiones http
