@@ -26,7 +26,7 @@ app.use((req,res,next)=>{
 });
 
 
-//Agregar prefijos a rutas
+//Agregar prefijos a ruta
 app.use('/api',restoRoutes);
 
 //Exportar modulo-fichero actual
