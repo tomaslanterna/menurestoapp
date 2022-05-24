@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var app=require('./app');
-var port=3800;
+var port= process.env.PORT || 3800;
 
 mongoose.Promise=global.Promise;
 mongoose.connect('mongodb+srv://tomi:Sanantonio20$@restoappcluster.iunel.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
