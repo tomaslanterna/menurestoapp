@@ -4,6 +4,7 @@ var validator = require('validator');
 var path = require('path');
 var Resto = require('../models/resto');
 var jwt = require('jsonwebtoken');
+var keyQR = require('../models/keyQR');
 
 var controller = {
 
@@ -22,31 +23,45 @@ var controller = {
 
         //Tomamos id de url
         var restoId = req.params.id;
+        var key = req.params.key.id;
 
-        //Valido si el id existe
-        if (!restoId || restoId == null) {
-            return res.status(404).send({
-                status: 'error',
-                message: 'No existe el resto'
-            });
-        }
 
-        //Busco el objeto en bd
-        Resto.findById(restoId, (err, resto) => {
-            if (err || !resto) {
+
+        keyQR.findById(key, (err, key) => {
+            if (err || !key) {
                 return res.status(404).send({
                     status: 'error',
                     message: 'No existe el resto'
                 });
             }
 
+            //Valido si el id existe
+            if (!restoId || restoId == null) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No existe el resto'
+                });
+            }
 
-            //Lo retorno como JSON
-            return res.status(200).send({
-                status: 'succes',
-                resto
+            //Busco el objeto en bd
+            Resto.findById(restoId, (err, resto) => {
+                if (err || !resto) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No existe el resto'
+                    });
+                }
+
+
+                //Lo retorno como JSON
+                return res.status(200).send({
+                    status: 'succes',
+                    resto
+                });
             });
-        });
+        })
+
+
     },
 
     getRestos: (req, res) => {

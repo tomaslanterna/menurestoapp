@@ -2,13 +2,15 @@
 
 var express=require('express');
 var RestoController=require('../controllers/restoControllers');
+var KeyQR=require('../controllers/keyController');
 
 var router=express.Router();
 
 router.get('/resto/:id',RestoController.getResto);
 router.get('/resto',ensureToken,RestoController.getRestos);
-router.post('/resto',RestoController.saveResto);
+router.post('/resto',ensureToken,RestoController.saveResto);
 router.post('/login',RestoController.login);
+router.post('/QRAuth',KeyQR.saveKeyQR);
 
 function ensureToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];
