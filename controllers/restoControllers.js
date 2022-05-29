@@ -31,7 +31,7 @@ var controller = {
             if (err || !key) {
                 return res.status(404).send({
                     status: 'error',
-                    message: 'No existe el resto'
+                    message: 'Key de mesa incorrecta'
                 });
             }
 
