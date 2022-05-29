@@ -6,7 +6,7 @@ var KeyQR=require('../controllers/keyController');
 
 var router=express.Router();
 
-router.get('/resto/:id',RestoController.getResto);
+router.get('/resto/:id/:key',RestoController.getResto);
 router.get('/resto',ensureToken,RestoController.getRestos);
 router.post('/resto',ensureToken,RestoController.saveResto);
 router.post('/login',RestoController.login);

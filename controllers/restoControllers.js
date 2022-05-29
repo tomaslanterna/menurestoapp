@@ -23,7 +23,7 @@ var controller = {
 
         //Tomamos id de url
         var restoId = req.params.id;
-        var key = req.params.key.id;
+        var key = req.params.key;
 
 
 
