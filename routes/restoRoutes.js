@@ -8,7 +8,7 @@ var router=express.Router();
 
 router.get('/resto/:id/:key',RestoController.getResto);
 router.get('/resto',ensureToken,RestoController.getRestos);
-router.post('/resto',ensureToken,RestoController.saveResto);
+router.post('/resto',RestoController.saveResto);
 router.post('/login',RestoController.login);
 router.post('/QRAuth',KeyQR.saveKeyQR);
 

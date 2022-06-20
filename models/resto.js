@@ -7,6 +7,7 @@ var RestoSchema=Schema({ //Defino estructura de objeto
     name:String,
     description:String,
     menu:[],
+    mesas:[],
     dateCreated:{type:Date,default:Date.now},
     image:String
 });

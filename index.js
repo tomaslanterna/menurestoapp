@@ -2,10 +2,11 @@
 
 var mongoose = require('mongoose');
 var app=require('./app');
+require('dotenv').config();
 var port= process.env.PORT || 3800;
 
 mongoose.Promise=global.Promise;
-mongoose.connect('mongodb+srv://tomi:Sanantonio20$@restoappcluster.iunel.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect(process.env.URL_DATABASE, { useNewUrlParser: true })
     .then(() => {
         console.log('La conexion a la db se a realizado bien');
         //Crear servidor y me pongo a escuchar peticiones https

@@ -5,12 +5,13 @@ var path = require('path');
 var Resto = require('../models/resto');
 var jwt = require('jsonwebtoken');
 var keyQR = require('../models/keyQR');
+require('dotenv').config();
 
 var controller = {
 
     login: (req, res) => {
         const user = { id: 3 };
-        const token = jwt.sign({ user }, 'clave secreta');
+        const token = jwt.sign({ user }, process.env.SECRET_KEY);
 
         return res.status(200).send({
             token,
@@ -51,12 +52,15 @@ var controller = {
                         message: 'No existe el resto'
                     });
                 }
+                const user = { id: 3 };
+                const token = jwt.sign({ user }, process.env.SECRET_KEY);
 
 
                 //Lo retorno como JSON
                 return res.status(200).send({
                     status: 'succes',
-                    resto
+                    resto,
+                    token
                 });
             });
         })
@@ -65,7 +69,7 @@ var controller = {
     },
 
     getRestos: (req, res) => {
-        jwt.verify(req.token, 'clave secreta', (err, data) => {
+        jwt.verify(req.token, process.env.SECRET_KEY, (err, data) => {
             if (err) {
                 return res.status(403).send({
                     status: 'error',
@@ -127,6 +131,7 @@ var controller = {
             resto.name = params.name;
             resto.description = params.description;
             resto.menu = params.menu;
+            resto.mesas=params.mesas;
             resto.image = null;
 
 
