@@ -3,9 +3,12 @@
 var validator = require('validator');
 var path = require('path');
 var Resto = require('../models/resto');
+var Mesa=require('../models/mesa');
 var jwt = require('jsonwebtoken');
 var keyQR = require('../models/keyQR');
 require('dotenv').config();
+var fs = require('fs');
+var qrcode = require('qrcode');
 
 var controller = {
 
@@ -131,7 +134,7 @@ var controller = {
             resto.name = params.name;
             resto.description = params.description;
             resto.menu = params.menu;
-            resto.mesas=params.mesas;
+            resto.mesas = params.mesas;
             resto.image = null;
 
 
@@ -154,6 +157,43 @@ var controller = {
                 message: 'Los datos no son validos'
             });
         }
+    },
+
+    generateQr: (req, res) => {
+        jwt.verify(req.token, process.env.SECRET_KEY, (err, data) => {
+            if (err) {
+                return res.status(403).send({
+                    status: 'error',
+                    message: 'Token no valido'
+                });
+            } else {
+                var params = req.body;
+                var url = params.url;
+                var restoId=params.restoId;
+                var mesaId=params.mesaId;
+                var QrUrl;
+
+                const run = async () => {
+                    const QR = await qrcode.toDataURL(url);
+                    /*return res.status(200).send({
+                        imgUrl: QR,
+                        message: 'QR creado correctamente',
+                        data
+                    });*/
+                    QrUrl=QR;
+                }
+                run();
+
+                Resto.findById(restoId, (err, resto) => {
+                    if (err || !resto) {
+                        return res.status(404).send({
+                            status: 'error',
+                            message: 'No existe el resto'
+                        });
+                    }
+                })
+            }
+        })
     }
 }
 

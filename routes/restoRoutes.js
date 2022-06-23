@@ -11,6 +11,7 @@ router.get('/resto',ensureToken,RestoController.getRestos);
 router.post('/resto',RestoController.saveResto);
 router.post('/login',RestoController.login);
 router.post('/QRAuth',KeyQR.saveKeyQR);
+router.post('/generateQR',ensureToken,RestoController.generateQr);
 
 function ensureToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];
