@@ -176,7 +176,7 @@ var controller = {
                 const run = async () => {
                     const QR = await qrcode.toDataURL(url);
                     /*return res.status(200).send({
-                        imgUrl: QR,
+                        imgUrl: QR, cambio
                         message: 'QR creado correctamente',
                         data
                     });*/
